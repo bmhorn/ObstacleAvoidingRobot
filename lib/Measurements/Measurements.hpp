@@ -4,14 +4,14 @@
 #include <NewPing.h>
 
 #define SONAR_NUM 3      // Number of sensors.
-#define MAX_DISTANCE 200 // Maximum distance (in cm) to ping.
+#define MAX_DISTANCE 300 // Maximum distance (in cm) to ping.
 
 // Ultrasonic sensor
 // L F R
 NewPing sonar[SONAR_NUM] = {
-  NewPing(A0, A0, MAX_DISTANCE),
-  NewPing(A1, A1, MAX_DISTANCE),
-  NewPing(A2, A2, MAX_DISTANCE)
+  NewPing(A1, A0, MAX_DISTANCE)
+  , NewPing(A3, A2, MAX_DISTANCE)
+  , NewPing(A4, A5, MAX_DISTANCE)
 };
 const char *orientationSonar[SONAR_NUM] = {"Left","Front","Right"};
 
@@ -26,10 +26,10 @@ void minElement(int array[], byte size,int& minValue,int& minIndex);
 -------------------------------------------------------------------*/
 void meassureAllDir(int distance[SONAR_NUM], const char *orientation[SONAR_NUM], boolean print_state) {
     for (byte i = 0; i < SONAR_NUM; i++) {
-        distance[i] = sonar[i].ping_cm();
-        delay(50);
+        distance[i] = sonar[i].convert_cm(sonar[i].ping_median(4));
+        delay(100);
         if (distance[i]==0){
-            distance[i]=MAX_SENSOR_DISTANCE;
+            distance[i]=MAX_DISTANCE;
         }
         if (print_state) {
             Serial.print(String("Distance at the ")+String(orientation[i]));
