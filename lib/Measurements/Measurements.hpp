@@ -3,7 +3,7 @@
 
 #include <NewPing.h>
 
-#define SONAR_NUM 3      // Number of sensors.
+#define SONAR_NUM 2//3      // Number of sensors.
 #define MAX_DISTANCE 300 // Maximum distance (in cm) to ping.
 
 // Ultrasonic sensor
@@ -11,9 +11,12 @@
 NewPing sonar[SONAR_NUM] = {
   NewPing(A1, A0, MAX_DISTANCE)
   , NewPing(A3, A2, MAX_DISTANCE)
-  , NewPing(A4, A5, MAX_DISTANCE)
+ // , NewPing(A4, A5, MAX_DISTANCE)
 };
-const char *orientationSonar[SONAR_NUM] = {"Left","Front","Right"};
+const char *orientationSonar[SONAR_NUM] = {"Right"
+                                            ,"Front"
+                                            //,"Right"
+                                            };
 
 /*-------------------------------------------------------------------
 ------------------------Function declaration-------------------------
@@ -27,7 +30,7 @@ void minElement(int array[], byte size,int& minValue,int& minIndex);
 void meassureAllDir(int distance[SONAR_NUM], const char *orientation[SONAR_NUM], boolean print_state) {
     for (byte i = 0; i < SONAR_NUM; i++) {
         distance[i] = sonar[i].convert_cm(sonar[i].ping_median(4));
-        delay(100);
+        delay(70);
         if (distance[i]==0){
             distance[i]=MAX_DISTANCE;
         }
@@ -36,7 +39,6 @@ void meassureAllDir(int distance[SONAR_NUM], const char *orientation[SONAR_NUM],
             Serial.println(String(": ")+distance[i]+String("cm"));
         }
     }
-    delay(100);
 }
 
 void minElement(int array[], byte size,int& minValue,int& minIndex) {
