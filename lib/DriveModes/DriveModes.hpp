@@ -3,6 +3,10 @@
 
 #include <AFMotor.h>
 
+//Change direction
+#define FORWARD 2
+#define BACKWARD 1
+
 // DC motor on M1-4
 AF_DCMotor motor1(1);//FR
 AF_DCMotor motor2(2);//FL
