@@ -3,19 +3,21 @@
 
 #include <NewPing.h>
 
-#define SONAR_NUM 2//3      // Number of sensors.
+#define SONAR_NUM 3      // Number of sensors.
 #define MAX_DISTANCE 300 // Maximum distance (in cm) to ping.
 
 // Ultrasonic sensor
 // L F R
 NewPing sonar[SONAR_NUM] = {
   NewPing(A1, A0, MAX_DISTANCE)
-  , NewPing(A3, A2, MAX_DISTANCE)
+  , NewPing(A3, A3, MAX_DISTANCE)
+  , NewPing(A2, A2, MAX_DISTANCE)
+ // , NewPing(A3, A2, MAX_DISTANCE)
  // , NewPing(A4, A5, MAX_DISTANCE)
 };
 const char *orientationSonar[SONAR_NUM] = {"Right"
                                             ,"Front"
-                                            //,"Right"
+                                            ,"Left"
                                             };
 
 /*-------------------------------------------------------------------
